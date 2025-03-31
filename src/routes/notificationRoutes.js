@@ -4,7 +4,7 @@ const router = express.Router();
 const kafka = require('kafka-node');
 const mongoose = require('mongoose');
 const { getIo } = require('../socket');
-const auth = require('../../../shared/middleware/auth');
+const auth = require('shared/middleware/auth');
 
 // Create a separate connection to the order-service database
 const orderServiceConnection = mongoose.createConnection(process.env.ORDER_SERVICE_MONGO_URI || 'mongodb://127.0.0.1:27017/order-service', {
