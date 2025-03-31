@@ -1,13 +1,16 @@
+# First stage - use the shared library image
+FROM shared-lib:latest as shared
+
+# Second stage - build the service
 FROM node:14
-
 WORKDIR /app
-
-# Copy the shared library package
-COPY --from=shared /shared/shared-*.tgz ./
-RUN npm install shared-*.tgz
 
 # Copy package files
 COPY package*.json ./
+
+# Copy and install shared library from first stage
+COPY --from=shared /output/shared-1.0.0.tgz ./
+RUN npm install shared-1.0.0.tgz
 
 # Install dependencies
 RUN npm install
