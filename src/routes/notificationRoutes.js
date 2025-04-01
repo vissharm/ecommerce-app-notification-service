@@ -24,13 +24,13 @@ const Order = orderServiceConnection.model('Order', new mongoose.Schema({
 
 // Kafka configuration
 const client = new kafka.KafkaClient({ 
-  kafkaHost: 'localhost:9092',
+  kafkaHost: process.env.KAFKA_BROKER || 'localhost:9092',
   connectTimeout: 3000,
   requestTimeout: 30000
 });
 const consumerGroup = new kafka.ConsumerGroup(
   {
-      kafkaHost: 'localhost:9092',
+      kafkaHost: process.env.KAFKA_BROKER || 'localhost:9092',
       groupId: 'notification-service-group',
       autoCommit: true,
       autoCommitIntervalMs: 5000,
