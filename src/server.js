@@ -22,6 +22,16 @@ app.use(cors({
 app.use(express.json());
 app.use('/api/notifications', notificationRoutes);
 
+// Add this after other app.use() statements
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'notification-service',
+    version: process.env.npm_package_version || '1.0.0',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Initialize Socket.IO
 initSocket(server);
 
