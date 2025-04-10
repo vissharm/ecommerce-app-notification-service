@@ -45,7 +45,7 @@ const producer = new Producer(kafkaClient);
 
 producer.on('ready', () => {
   console.log('Kafka Producer is connected and ready.');
-  producer.createTopics(['order-created', 'user-registered'], false, (err, data) => {
+  producer.createTopics(['order-created', 'orderStatusUpdate'], false, (err, data) => {
     if (err) console.error('Error creating Kafka topics:', err);
     else console.log('Kafka topics created:', data);
   });
